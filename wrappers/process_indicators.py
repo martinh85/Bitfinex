@@ -1,4 +1,6 @@
 import talib
+from inputs import ALLpairs
+import pickle
 
 # Get candle data for coin and output a indicator values for last timeframe
 def process_indicators(df_price, timeframe):
@@ -38,7 +40,7 @@ def process_indicators(df_price, timeframe):
     kijun_dist = kijun / closes - 1
     tenkan_dist = tenkan / closes - 1
 
-    # Returns dict of last elements of the calculated indicators
+    # Returns dict of the calculated indicators for last timeframe
     return {'ema50_dist_'+ timeframe: ema50_dist[-1],
             'ema200_dist_'+ timeframe: ema200_dist[-1],
             'upper_bb_dist_'+ timeframe: upper_bb_dist[-1],
@@ -50,4 +52,20 @@ def process_indicators(df_price, timeframe):
             'kijun_dist_'+ timeframe: kijun_dist[-1],
             'tenkan_dist_'+ timeframe: tenkan_dist[-1]
             }
+
+# Not used
+def prepade_df_ml(list):
+    # Dictionary for merging all timeframes per traded pair
+    dict_all_timeframes = {}
+    for x in range(4):
+        for i in range(0, count(ALLpairs) - 1):
+            dict_all_timeframes.update(list[x][i])
+        pandas.DataFrame.from_dict(dict_all_timeframes)
+
+# Export indicator into pickle file
+def pickle_indicators(tf, list_indicators):
+    pickle_filename = 'pickles/' + tf + '_indicators.pickle'
+    with open(pickle_filename, 'wb') as handler:
+        pickle.dump(list_indicators, handler, protocol=pickle.HIGHEST_PROTOCOL)
+    handler.close()
 
