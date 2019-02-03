@@ -3,12 +3,18 @@ import wrappers.process_indicators as process_indicators
 
 import time
 import psycopg2
-from config import config
+£from config import config
 
 # Import list of traded pairs form get_timeframe_data file
 from inputs import ALLpairs
 
-params = config()
+params = {
+    "dbname": 'llweb',
+    "user": 'super',
+    "password": 'postgres85',
+    "host": 'localhost',
+    "port": tunnel.local_bind_port,
+}
 conn = psycopg2.connect(**params)
 cur = conn.cursor()
 
