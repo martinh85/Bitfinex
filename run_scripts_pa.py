@@ -36,7 +36,7 @@ for pair in ALLpairs:
     cur.execute("INSERT INTO data_1m_" +
                     str(pair[0]) + "_" + str(pair[1]) +
                     " VALUES(%s, %s, %s, %s, %s, %s)", last1m)
-    conn.commit()
+conn.commit()
 conn.close()
 
 ### Save to 1m database

@@ -1,6 +1,6 @@
 # Traded coins
-symbols = ['ETH', 'XRP',]# 'LTC', 'EOS', 'IOT', 'XMR','ZEC', 'NEO',
-            #'ETC', 'DSH', 'OMG', 'TRX', 'REP', 'BCH']
+symbols = ['ETH', 'XRP', 'LTC', 'EOS', 'IOT', 'XMR','ZEC', 'NEO',
+            'ETC', 'DSH', 'OMG', 'TRX', 'REP', 'BCH']
 
 # Prepare trading pairs in format ETH/BTC: ['ETH', 'BTC']
 USDpairs = []
@@ -11,6 +11,12 @@ for coin in symbols:
 
 BTCpairs = []
 for coin in symbols:
+    if coin == 'IOT':
+        coin = 'IOTA'
+    if coin == 'DSH':
+        coin = 'DASH'
+    if coin == 'BCH':
+        coin = 'BCHABC'
     list = [coin]
     list.append('BTC')
     BTCpairs.append(list)
