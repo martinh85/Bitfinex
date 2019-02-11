@@ -1,4 +1,4 @@
-from  wrappers.get_price_data import get_price_data
+from  wrappers.handle_price_data import get_price_data
 # Import list of traded pairs
 from inputs import ALLpairs
 

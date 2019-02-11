@@ -1,0 +1,2 @@
+timestamp,ema50_dist_trx_btc_5m,ema200_dist_trx_btc_5m,upper_bb_dist_trx_btc_5m,lower_bb_dist_trx_btc_5m,width_bb_trx_btc_5m,rsi_trx_btc_5m,stoch_rsi_fastk_trx_btc_5m,stoch_rsi_fastd_trx_btc_5m,kijun_dist_trx_btc_5m,tenkan_dist_trx_btc_5m
+2019-02-11 16:00:00,0.7487185924427209,1.1752883292610594,1.1756548730237792,-0.02125371862269354,1.1900396757690246,36.846904781487346,36.98486541926232,71.41707149438595,0.5772005772005651,0.3607503607503615

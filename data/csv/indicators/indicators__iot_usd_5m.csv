@@ -1,0 +1,2 @@
+timestamp,ema50_dist_iot_usd_5m,ema200_dist_iot_usd_5m,upper_bb_dist_iot_usd_5m,lower_bb_dist_iot_usd_5m,width_bb_iot_usd_5m,rsi_iot_usd_5m,stoch_rsi_fastk_iot_usd_5m,stoch_rsi_fastd_iot_usd_5m,kijun_dist_iot_usd_5m,tenkan_dist_iot_usd_5m
+2019-02-11 16:00:00,0.20531645932226894,1.1402046296181467,0.3735493646682908,-0.8403468072718523,1.2167360182483447,51.73898658097509,80.76596022838913,43.67041379697341,0.6248183667538543,-0.25610287707061863

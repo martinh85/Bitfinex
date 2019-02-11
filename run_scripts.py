@@ -1,6 +1,4 @@
-from wrappers.get_price_data import get_price_data
-import wrappers.process_indicators as process_indicators
-
+from wrappers.handle_price_data import get_price_data
 import time
 import psycopg2
 import sshtunnel
@@ -8,79 +6,81 @@ import sshtunnel
 # Import list of traded pairs form get_timeframe_data file
 from inputs import ALLpairs
 
-sshtunnel.SSH_TIMEOUT = 5.0
-sshtunnel.TUNNEL_TIMEOUT = 5.0
+# sshtunnel.SSH_TIMEOUT = 5.0
+# sshtunnel.TUNNEL_TIMEOUT = 5.0
 
-with sshtunnel.SSHTunnelForwarder(
-    ('ssh.pythonanywhere.com'),
-    ssh_username='martendo',
-    ssh_password='martendo85',
-    remote_bind_address=('martendo-824.postgres.pythonanywhere-services.com', 10824)
-) as tunnel:
+#with sshtunnel.SSHTunnelForwarder(
+#    ('ssh.pythonanywhere.com'),
+#    ssh_username='martendo',
+#    ssh_password='martendo85',
+#    remote_bind_address=('martendo-824.postgres.pythonanywhere-services.com', 10824)
+#) as tunnel:
 
-    params = {
+#    params = {
+#        "dbname": 'llweb',
+#        "user": 'super',
+#        "password": 'postgres85',
+#        "host": 'localhost',
+#        "port": tunnel.local_bind_port,
+#    }
+
+# Use local Postgres
+params = {
         "dbname": 'llweb',
-        "user": 'super',
-        "password": 'postgres85',
+        "user": 'postgres',
+        "password": 'martendo85',
         "host": 'localhost',
-        "port": tunnel.local_bind_port,
+        "port": '5432'
     }
 
-    #params = config()
-    conn = psycopg2.connect(**params)
-    cur = conn.cursor()
+conn = psycopg2.connect(**params)
+cur = conn.cursor()
 
-    for pair in ALLpairs:
-        last1m = list(get_price_data(pair, '1m', hist=False))
-        holder = int(str(last1m[0])[:-3])
-        ts = time.gmtime(holder)
-        last1m[0] = time.strftime("%Y-%m-%d %H:%M", ts)
-        print(last1m)
-        print(pair[0])
-        cur.execute("DROP TABLE IF EXISTS data_1m_" + str(pair[0]) + "_" + str(pair[1]))
-        cur.execute("CREATE TABLE IF NOT EXISTS data_1m_" + str(pair[0]) + "_" + str(pair[1]) + """(
-                        timestamp timestamp PRIMARY KEY,
-                        open DECIMAL(13,8),
-                        close DECIMAL(13,8),
-                        high DECIMAL(13,8),
-                        low DECIMAL(13,8),
-                        volume DECIMAL(13,8));""")
-        cur.execute("INSERT INTO data_1m_" +
-                        str(pair[0]) + "_" + str(pair[1]) +
-                        " VALUES(%s, %s, %s, %s, %s, %s)", last1m)
-    conn.commit()
-    conn.close()
+# Make price data query for all pairs
 
-### Save to 1m database
+# Load 5m timeframe
+for pair in ALLpairs:
+    get_price_data(pair, '5m', cur,  hist=False)
 
-# Get actual time
-#time = time.gmtime()
+# Load 15m timeframe
+i = 0
+while i == 0:
+    time = time.gmtime()
+    if time[4] % 15 == 1:
+        for pair in ALLpairs:
+            get_price_data(pair, '15m', cur,  hist=False)
+            i += 1
+    else: time.sleep(5)
 
-# Get 5m price data
-#if time[4] % 5 == 0:
-### Query database for last x entries
-# save to dataframe
-# process indicators
-# save indicators to pickle
+# Load 1h timeframe
+i = 0
+while i == 0:
+    time = time.gmtime()
+    if time[4] % 60 == 2:
+        for pair in ALLpairs:
+            get_price_data(pair, '1h', cur,  hist=False)
+            i += 1
+    else: time.sleep(5)
 
-### for every timeframe change, reload new plots
+# Load 6h timeframe
+i = 0
+while i == 0:
+    time = time.gmtime()
+    if time[4] % 60 == 3 and (time[3] - 1) % 6 == 0:
+        for pair in ALLpairs:
+            get_price_data(pair, '6h', cur,  hist=False)
+            i += 1
+    else: time.sleep(5)
 
-### ! just for strategies from ML, for every timeframe change, reload combination of pickles for all timeframes
+# Load 1D timeframe
+i = 0
+while i == 0:
+    time = time.gmtime()
+    if time[4] % 60 == 4 and (time[3] - 1) % 24 == 0:
+        for pair in ALLpairs:
+            get_price_data(pair, '1D', cur,  hist=False)
+            i += 1
+    else: time.sleep(5)
 
-
-# Get 5m minute price data
-
-    # Update database
-
-
-# Get 15m price data
-#if time[4] % 15 == 0:
-
-# Get 1h price data
-#if time[4] % 60 == 0:
-
-# Get 4h price data
-#if time[4] % 60 == 0 and time[3] % 4 == 0:
-
-# Get 1d price data
-#if time[4] % 60 == 0 and time[3] % 24 == 0:
+conn.commit()
+conn.close()

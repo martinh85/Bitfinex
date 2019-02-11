@@ -1,0 +1,2 @@
+timestamp,ema50_dist_omg_usd_5m,ema200_dist_omg_usd_5m,upper_bb_dist_omg_usd_5m,lower_bb_dist_omg_usd_5m,width_bb_omg_usd_5m,rsi_omg_usd_5m,stoch_rsi_fastk_omg_usd_5m,stoch_rsi_fastd_omg_usd_5m,kijun_dist_omg_usd_5m,tenkan_dist_omg_usd_5m
+2019-02-11 16:00:00,-0.9893114696069905,-0.7509749004505406,0.11615999440512947,-1.6313115095569541,1.7608109810915626,66.53194713563838,100.00000000000001,100.00000000000011,-1.0942760942761032,-0.7912457912457982

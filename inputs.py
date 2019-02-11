@@ -1,6 +1,11 @@
+
+# Watched timeframes
+timeframes = ['5m', '15m', '30m', '1h', '4h', '12h', '1D']
+
 # Traded coins
-symbols = ['ETH', 'XRP', 'LTC', 'EOS', 'IOT', 'XMR','ZEC', 'NEO',
-            'ETC', 'DSH', 'OMG', 'TRX', 'REP', 'BCH']
+symbols = ['ETH', 'XRP', 'LTC', 'EOS', 'IOT', 'XMR',
+            'ZEC', 'NEO',
+            'ETC', 'DSH', 'OMG', 'TRX']
 
 # Prepare trading pairs in format ETH/BTC: ['ETH', 'BTC']
 USDpairs = []

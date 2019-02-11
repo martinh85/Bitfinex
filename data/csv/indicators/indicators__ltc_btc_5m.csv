@@ -1,0 +1,2 @@
+timestamp,ema50_dist_ltc_btc_5m,ema200_dist_ltc_btc_5m,upper_bb_dist_ltc_btc_5m,lower_bb_dist_ltc_btc_5m,width_bb_ltc_btc_5m,rsi_ltc_btc_5m,stoch_rsi_fastk_ltc_btc_5m,stoch_rsi_fastd_ltc_btc_5m,kijun_dist_ltc_btc_5m,tenkan_dist_ltc_btc_5m
+2019-02-11 16:00:00,0.2932536945069675,0.7556218384951352,0.5304039424935514,-0.12222384848827872,0.6512985554538694,44.20226669279793,0.0,47.83993136275935,0.2803661251752132,0.30922734394325246
